@@ -10,6 +10,6 @@ Examples
    :maxdepth: 2
    
    note_about_examples
-   nii_2_tracks
    find_correspondence
+   nii_2_tracks
    visualize_crossings

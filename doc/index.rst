@@ -1,4 +1,6 @@
-
+####
+Dipy
+####
 
 Dipy_ is an *international*, **free** and **open soure** software project for **diffusion** *magnetic resonance imaging* **analysis**.  
 
