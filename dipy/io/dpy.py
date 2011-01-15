@@ -1,16 +1,32 @@
-''' Some ideas for the dipy format
+''' The first draft of a dipy data format
 '''
 
 import numpy as np
 
+# Conditional import machinery for pytables
+from ..utils.tripwire import TripWire, is_tripwire
+
 try:
     import tables
-    no_pytables = False
 except ImportError:
-    raise ImportError('pytables is not installed')
+    tables = TripWire('We need pytables for these functions, but '
+                      '``import tables`` raised an ImportError')
 
-       
-class Dpy():
+def setup_module():
+    """Sets up doctests in module for nosetests
+
+    We need to skip doctests if pytables is not installed
+    """
+    if not is_tripwire(tables):
+        return
+    try:
+        import nose
+    except ImportError:
+        return
+    raise nose.plugins.skip.SkipTest('No pytables for these tests')
+
+
+class Dpy(object):
 
     def __init__(self,fname,mode='r',compression=0):
         ''' Advanced storage system for tractography based on HDF5
