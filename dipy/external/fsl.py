@@ -18,6 +18,17 @@ class FSLError(Exception):
     """ Class signals error in FSL processing """
 
 
+def have_flirt():
+    """ Return True if we can call flirt without error
+
+    Relies on the fact that flirt produces text on stdout when called with no
+    arguments
+    """
+    p = Popen('flirt', stdout=PIPE, stderr=PIPE, shell=True)
+    stdout, stderr = p.communicate()
+    return stdout != ''
+
+
 def write_bvals_bvecs(bvals, bvecs, outpath=None, prefix=''):
     ''' Write FSL FDT bvals and bvecs files
 
