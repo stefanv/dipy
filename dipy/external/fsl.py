@@ -11,6 +11,7 @@ from numpy import newaxis
 from scipy.ndimage import map_coordinates as mc
 
 import nibabel as nib
+from nibabel.tmpdirs import InTemporaryDirectory
 
 _VAL_FMT = '   %e'
 
@@ -263,7 +264,7 @@ def flirt(in_img, ref_img, dof=6, flags=''):
         k] + in_vox2out_vox[:3,3])
     """
     omat = 'reg.mat'
-    with nib.tmpdirs.InTemporaryDirectory():
+    with InTemporaryDirectory():
         nib.save(in_img, 'in.nii')
         nib.save(ref_img, 'ref.nii')
         cmd = 'flirt %s -dof %d -in in.nii -ref ref.nii -omat %s' % (
