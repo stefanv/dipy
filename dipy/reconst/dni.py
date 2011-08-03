@@ -87,7 +87,7 @@ class DiffusionNabla(object):
         #self.q=qtable+self.origin
         #self.q=self.q.astype('i8')
         
-        self.create_qtable(bvals,gradients,16,8)
+        self.create_qspace(bvals,gradients,16,8)
         #peak threshold
         self.peak_thr=20.
         #calculate coordinates of equators
@@ -98,7 +98,7 @@ class DiffusionNabla(object):
         if auto:
             self.fit()        
     
-    def create_qtable(self,bvals,gradients,size,origin):
+    def create_qspace(self,bvals,gradients,size,origin):
         bv=bvals
         bmin=np.sort(bv)[1]
         bv=np.sqrt(bv/bmin)
